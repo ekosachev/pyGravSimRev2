@@ -3,9 +3,9 @@ import time
 from typing import List
 from json import load
 
+import PySide6.QtCore as QtCore
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QApplication, QMainWindow
-from PySide6.QtCore import QFile
 from MainwindowUi import MainwindowUi
 from Particle import Particle
 from Simulation import Simulation
@@ -86,7 +86,11 @@ class MainWindow(QMainWindow):
         while self.simulation_running:
             with self.draw_condition:
                 self.draw_condition.wait()
-                self.ui.lblSimulationDisplay.setPixmap(QPixmap.fromImage(self.simulation_instance.run_step(False)))
+                self.ui.lblSimulationDisplay.setPixmap(QPixmap.fromImage(self.simulation_instance.run_step(False)).scaled(
+                    self.ui.lblSimulationDisplay.width(),
+                    self.ui.lblSimulationDisplay.height(),
+                    QtCore.Qt.KeepAspectRatio
+                ))
 
 
 if __name__ == "__main__":

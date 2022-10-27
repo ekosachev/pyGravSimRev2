@@ -35,7 +35,8 @@ class Simulation(object):
                                  tuple(self.config["DRAWING"]["background_color"]))  # Clear the frame
 
         for particle in self.particles:
-            pos: Vector2D = particle.position + Vector2D(self.framesize[0] // 2, self.framesize[1] // 2)
+            pos: Vector2D = Vector2D(self.framesize[0] // 2, self.framesize[1] // 2) - particle.position
+            print(repr(pos))
             self.frameDraw.ellipse(xy=((pos.x - particle.radius,
                                         pos.y - particle.radius),
                                        (pos.x + particle.radius,
@@ -51,5 +52,4 @@ class Simulation(object):
                 self.frameDraw.line(xy=((pos.x, pos.y),
                                         (pos.x + particle.velocity.x, pos.y + particle.velocity.y)),
                                     fill=tuple(self.config["DRAWING"]["velocity_vectors_color"]))
-        self.frameImage.save("frame.jpg")
         return ImageQt(self.frameImage)
