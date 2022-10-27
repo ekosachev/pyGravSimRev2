@@ -1,0 +1,12 @@
+{
+  "DRAWING": {
+    "background_color": [0, 0, 0],
+    "particle_color": [128, 255, 128],
+    "velocity_vectors_color": [0, 0, 255],
+    "particle_label_color": [0, 0, 0]
+  },
+  "SIMULATION": {
+    "frame_size_x": 500,
+    "frame_size_y": 500
+  }
+}
