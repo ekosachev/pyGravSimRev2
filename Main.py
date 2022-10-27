@@ -86,7 +86,7 @@ class MainWindow(QMainWindow):
         while self.simulation_running:
             with self.draw_condition:
                 self.draw_condition.wait()
-                self.ui.lblSimulationDisplay.setPixmap(QPixmap.fromImage(self.simulation_instance.run_step(False)).scaled(
+                self.ui.lblSimulationDisplay.setPixmap(QPixmap.fromImage(self.simulation_instance.run_step(True, True)).scaled(
                     self.ui.lblSimulationDisplay.width(),
                     self.ui.lblSimulationDisplay.height(),
                     QtCore.Qt.KeepAspectRatio

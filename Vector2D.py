@@ -10,12 +10,10 @@ class Vector2D(object):
         return sqrt(self.x ** 2 + self.y ** 2)
 
     def __add__(self, other):
-        temp = Vector2D(self.x + other.x, self.y + other.y)
-        return temp
+        return Vector2D(self.x + other.x, self.y + other.y)
 
     def __sub__(self, other):
-        temp = Vector2D(self.x - other.x, self.y - other.y)
-        return temp
+        return Vector2D(self.x - other.x, self.y - other.y)
 
     def __abs__(self):
         return Vector2D(self.x / self.len(), self.y / self.len())
@@ -24,5 +22,14 @@ class Vector2D(object):
         return f"({self.x}, {self.y})"
 
     def __mul__(self, coefficient: float):
-        temp = Vector2D(self.x * coefficient, self.y * coefficient)
-        return temp
+        return Vector2D(self.x * coefficient, self.y * coefficient)
+
+    def __truediv__(self, denominator: int):
+        if denominator == 0:
+            raise ZeroDivisionError
+        return Vector2D(self.x / denominator, self.y / denominator)
+
+    def stretch(self, newlength: float):
+        factor = newlength / self.len()
+        return Vector2D(self.x * factor, self.y * factor)
+

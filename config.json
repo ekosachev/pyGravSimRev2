@@ -6,7 +6,7 @@
     "particle_label_color": [0, 0, 0]
   },
   "SIMULATION": {
-    "frame_size_x": 500,
-    "frame_size_y": 500
+    "frame_size_x": 1000,
+    "frame_size_y": 1000
   }
 }
