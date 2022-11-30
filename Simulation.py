@@ -103,7 +103,6 @@ class Simulation(object):
                 field[i * self.framesize[1] + j] = force
                 min_force = min(min_force, force)
                 max_force = max(max_force, force)
-        print(max_force, min_force)
 
         # Map all the values to a range from 0 to 1
         field = list(map(lambda x: translate(x, min_force, max_force) ** 0.2, field))
