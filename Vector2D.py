@@ -30,6 +30,8 @@ class Vector2D(object):
         return Vector2D(self.x / denominator, self.y / denominator)
 
     def stretch(self, newlength: float):
+        if self.len() == 0:
+            return Vector2D(0, 0)
         factor = newlength / self.len()
         return Vector2D(self.x * factor, self.y * factor)
 

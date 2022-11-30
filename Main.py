@@ -22,6 +22,8 @@ class ListItem(object):
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
+        self.simulation_cycle_thread = None
+        self.draw_cycle_thread = None
         self.simulation_instance = None
         self.ui = MainwindowUi()
         self.ui.setupUi(self)
@@ -29,8 +31,7 @@ class MainWindow(QMainWindow):
         self.particle_list: List[ListItem] = []
         self.draw_condition = Condition()
         self.fps_limit: int = 30
-        self.draw_cycle_thread = Thread(target=self.draw_cycle)
-        self.simulation_cycle_thread = Thread(target=self.simulation_cycle)
+
         self.simulation_running = False
         with open("config.json") as f:
             self.config = load(f)
@@ -40,6 +41,15 @@ class MainWindow(QMainWindow):
         self.ui.btnDelete.clicked.connect(self.remove_particle)
         self.ui.btnSimStart.clicked.connect(self.start_simulation)
         self.ui.btnSimStop.clicked.connect(self.stop_simulation)
+        self.ui.btnShowHeatMap.clicked.connect(self.draw_heatmap)
+
+        self.ui.btnShowHeatMap.setDisabled(True)
+        self.ui.btnSimStop.setDisabled(True)
+
+    def closeEvent(self, *args, **kwargs):
+        super(QMainWindow, self).closeEvent(*args, **kwargs)
+        if self.simulation_running:
+            self.stop_simulation()
 
     def update_list_view(self):
         self.ui.lstBodies.clear()
@@ -68,13 +78,25 @@ class MainWindow(QMainWindow):
                                               framesize=(int(self.config["SIMULATION"]["frame_size_x"]),
                                                          int(self.config["SIMULATION"]["frame_size_y"])))
         self.simulation_running = True
+        self.draw_cycle_thread = Thread(target=self.draw_cycle)
+        self.simulation_cycle_thread = Thread(target=self.simulation_cycle)
         self.simulation_cycle_thread.start()
         self.draw_cycle_thread.start()
+        self.ui.btnShowHeatMap.setDisabled(True)
+        self.ui.btnSimStart.setDisabled(True)
+        self.ui.btnSimStep.setDisabled(True)
+        self.ui.gpbEdit.setDisabled(True)
+        self.ui.btnSimStop.setEnabled(True)
 
     def stop_simulation(self):
         self.simulation_running = False
-        self.draw_cycle_thread.join()
         self.simulation_cycle_thread.join()
+        self.draw_cycle_thread.join()
+        self.ui.btnShowHeatMap.setEnabled(True)
+        self.ui.btnSimStart.setEnabled(True)
+        self.ui.btnSimStep.setEnabled(True)
+        self.ui.gpbEdit.setEnabled(True)
+        self.ui.btnSimStop.setDisabled(True)
 
     def draw_cycle(self):
         while self.simulation_running:
@@ -85,12 +107,24 @@ class MainWindow(QMainWindow):
     def simulation_cycle(self):
         while self.simulation_running:
             with self.draw_condition:
-                self.draw_condition.wait()
-                self.ui.lblSimulationDisplay.setPixmap(QPixmap.fromImage(self.simulation_instance.run_step(True, True)).scaled(
+                self.draw_condition.wait(1.0)
+                self.ui.lblSimulationDisplay.setPixmap(QPixmap.fromImage(
+                    self.simulation_instance.run_step(
+                        draw_barycenter=self.ui.cbxDrawMassCenter.isChecked(),
+                        draw_velocity_vectors=self.ui.cbxDrawSpdVects.isChecked(),
+                        draw_trails=self.ui.cbxDrawTrails.isChecked())).scaled(
                     self.ui.lblSimulationDisplay.width(),
                     self.ui.lblSimulationDisplay.height(),
                     QtCore.Qt.KeepAspectRatio
                 ))
+
+    def draw_heatmap(self):
+        self.ui.lblSimulationDisplay.setPixmap(QPixmap.fromImage(
+            self.simulation_instance.draw_force_heatmap().scaled(
+                self.ui.lblSimulationDisplay.width(),
+                self.ui.lblSimulationDisplay.height(),
+                QtCore.Qt.KeepAspectRatio
+            )))
 
 
 if __name__ == "__main__":

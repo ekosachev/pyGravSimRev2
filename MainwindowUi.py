@@ -65,6 +65,11 @@ class MainwindowUi(object):
 
         self.gpbEdit = QGroupBox(self.horizontalLayoutWidget)
         self.gpbEdit.setObjectName(u"gpbEdit")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.gpbEdit.sizePolicy().hasHeightForWidth())
+        self.gpbEdit.setSizePolicy(sizePolicy1)
         self.gpbEdit.setMaximumSize(QSize(255, 250))
         self.verticalLayoutWidget = QWidget(self.gpbEdit)
         self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
@@ -166,19 +171,19 @@ class MainwindowUi(object):
 
         self.lblRadius = QLabel(self.verticalLayoutWidget)
         self.lblRadius.setObjectName(u"lblRadius")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.lblRadius.sizePolicy().hasHeightForWidth())
-        self.lblRadius.setSizePolicy(sizePolicy1)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.lblRadius.sizePolicy().hasHeightForWidth())
+        self.lblRadius.setSizePolicy(sizePolicy2)
         self.lblRadius.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
         self.gridLayout.addWidget(self.lblRadius, 1, 0, 1, 1)
 
         self.lblMass = QLabel(self.verticalLayoutWidget)
         self.lblMass.setObjectName(u"lblMass")
-        sizePolicy1.setHeightForWidth(self.lblMass.sizePolicy().hasHeightForWidth())
-        self.lblMass.setSizePolicy(sizePolicy1)
+        sizePolicy2.setHeightForWidth(self.lblMass.sizePolicy().hasHeightForWidth())
+        self.lblMass.setSizePolicy(sizePolicy2)
         self.lblMass.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
         self.gridLayout.addWidget(self.lblMass, 0, 0, 1, 1)
@@ -192,19 +197,19 @@ class MainwindowUi(object):
         self.btnDelete = QPushButton(self.verticalLayoutWidget)
         self.btnDelete.setObjectName(u"btnDelete")
         self.btnDelete.setEnabled(True)
-        sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.btnDelete.sizePolicy().hasHeightForWidth())
-        self.btnDelete.setSizePolicy(sizePolicy2)
+        sizePolicy3 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.btnDelete.sizePolicy().hasHeightForWidth())
+        self.btnDelete.setSizePolicy(sizePolicy3)
 
         self.gridLayout_2.addWidget(self.btnDelete, 1, 0, 1, 1)
 
         self.btnCopy = QPushButton(self.verticalLayoutWidget)
         self.btnCopy.setObjectName(u"btnCopy")
         self.btnCopy.setEnabled(True)
-        sizePolicy2.setHeightForWidth(self.btnCopy.sizePolicy().hasHeightForWidth())
-        self.btnCopy.setSizePolicy(sizePolicy2)
+        sizePolicy3.setHeightForWidth(self.btnCopy.sizePolicy().hasHeightForWidth())
+        self.btnCopy.setSizePolicy(sizePolicy3)
 
         self.gridLayout_2.addWidget(self.btnCopy, 1, 1, 1, 1)
 
@@ -230,25 +235,25 @@ class MainwindowUi(object):
         self.vloSimSettings.setContentsMargins(0, 0, 0, 0)
         self.cbxDrawTrails = QCheckBox(self.verticalLayoutWidget_3)
         self.cbxDrawTrails.setObjectName(u"cbxDrawTrails")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Preferred)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.cbxDrawTrails.sizePolicy().hasHeightForWidth())
-        self.cbxDrawTrails.setSizePolicy(sizePolicy3)
+        sizePolicy4 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Preferred)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.cbxDrawTrails.sizePolicy().hasHeightForWidth())
+        self.cbxDrawTrails.setSizePolicy(sizePolicy4)
 
         self.vloSimSettings.addWidget(self.cbxDrawTrails)
 
         self.cbxDrawSpdVects = QCheckBox(self.verticalLayoutWidget_3)
         self.cbxDrawSpdVects.setObjectName(u"cbxDrawSpdVects")
-        sizePolicy3.setHeightForWidth(self.cbxDrawSpdVects.sizePolicy().hasHeightForWidth())
-        self.cbxDrawSpdVects.setSizePolicy(sizePolicy3)
+        sizePolicy4.setHeightForWidth(self.cbxDrawSpdVects.sizePolicy().hasHeightForWidth())
+        self.cbxDrawSpdVects.setSizePolicy(sizePolicy4)
 
         self.vloSimSettings.addWidget(self.cbxDrawSpdVects)
 
         self.cbxDrawMassCenter = QCheckBox(self.verticalLayoutWidget_3)
         self.cbxDrawMassCenter.setObjectName(u"cbxDrawMassCenter")
-        sizePolicy3.setHeightForWidth(self.cbxDrawMassCenter.sizePolicy().hasHeightForWidth())
-        self.cbxDrawMassCenter.setSizePolicy(sizePolicy3)
+        sizePolicy4.setHeightForWidth(self.cbxDrawMassCenter.sizePolicy().hasHeightForWidth())
+        self.cbxDrawMassCenter.setSizePolicy(sizePolicy4)
 
         self.vloSimSettings.addWidget(self.cbxDrawMassCenter)
 
@@ -283,6 +288,21 @@ class MainwindowUi(object):
         self.btnSimStop.setIconSize(QSize(15, 15))
 
         self.horizontalLayout_2.addWidget(self.btnSimStop)
+
+        self.btnShowHeatMap = QPushButton(self.verticalLayoutWidget_3)
+        self.btnShowHeatMap.setObjectName(u"btnShowHeatMap")
+        sizePolicy5 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.btnShowHeatMap.sizePolicy().hasHeightForWidth())
+        self.btnShowHeatMap.setSizePolicy(sizePolicy5)
+        self.btnShowHeatMap.setMinimumSize(QSize(23, 23))
+        self.btnShowHeatMap.setMaximumSize(QSize(23, 23))
+        icon3 = QIcon()
+        icon3.addFile(u":/icon/icons/free-icon-font-layers-3917233.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btnShowHeatMap.setIcon(icon3)
+
+        self.horizontalLayout_2.addWidget(self.btnShowHeatMap)
 
 
         self.vloSimSettings.addLayout(self.horizontalLayout_2)
@@ -370,7 +390,8 @@ class MainwindowUi(object):
         self.btnSimStart.setText("")
         self.btnSimStep.setText("")
         self.btnSimStop.setText("")
-        self.lblCreator.setText(QCoreApplication.translate("MainWindow", u"by Egor Kosachev | Distributed via MIT License", None))
+        self.btnShowHeatMap.setText("")
+        self.lblCreator.setText(QCoreApplication.translate("MainWindow", u"by Egor Kosachev | Distributed via MIT Liscence", None))
         self.lblSimulationDisplay.setText("")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.sim_tab), QCoreApplication.translate("MainWindow", u"\u041c\u043e\u0434\u0435\u043b\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435", None))
         self.lbl_position_graph.setText("")
