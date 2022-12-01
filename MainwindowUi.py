@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'MainWindow.ui'
+## Form generated from reading UI file 'mainWindow.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.3.1
 ##
@@ -15,10 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QCheckBox, QFrame, QGridLayout,
-    QGroupBox, QHBoxLayout, QLabel, QLayout,
-    QListWidget, QListWidgetItem, QMainWindow, QPushButton,
-    QSizePolicy, QSpinBox, QTabWidget, QVBoxLayout,
+from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFrame,
+    QGridLayout, QGroupBox, QHBoxLayout, QLabel,
+    QLayout, QListWidget, QListWidgetItem, QMainWindow,
+    QPushButton, QSizePolicy, QSpinBox, QVBoxLayout,
     QWidget)
 import resource_rc
 
@@ -30,17 +30,9 @@ class MainwindowUi(object):
         MainWindow.setMaximumSize(QSize(900, 630))
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.tabWidget = QTabWidget(self.centralwidget)
-        self.tabWidget.setObjectName(u"tabWidget")
-        self.tabWidget.setGeometry(QRect(6, 9, 891, 611))
-        self.tabWidget.setDocumentMode(False)
-        self.tabWidget.setTabsClosable(False)
-        self.tabWidget.setTabBarAutoHide(False)
-        self.sim_tab = QWidget()
-        self.sim_tab.setObjectName(u"sim_tab")
-        self.horizontalLayoutWidget = QWidget(self.sim_tab)
+        self.horizontalLayoutWidget = QWidget(self.centralwidget)
         self.horizontalLayoutWidget.setObjectName(u"horizontalLayoutWidget")
-        self.horizontalLayoutWidget.setGeometry(QRect(0, 0, 881, 581))
+        self.horizontalLayoutWidget.setGeometry(QRect(10, 10, 881, 611))
         self.horizontalLayout = QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -226,10 +218,12 @@ class MainwindowUi(object):
 
         self.gpbSettings = QGroupBox(self.horizontalLayoutWidget)
         self.gpbSettings.setObjectName(u"gpbSettings")
+        sizePolicy1.setHeightForWidth(self.gpbSettings.sizePolicy().hasHeightForWidth())
+        self.gpbSettings.setSizePolicy(sizePolicy1)
         self.gpbSettings.setMaximumSize(QSize(255, 150))
         self.verticalLayoutWidget_3 = QWidget(self.gpbSettings)
         self.verticalLayoutWidget_3.setObjectName(u"verticalLayoutWidget_3")
-        self.verticalLayoutWidget_3.setGeometry(QRect(9, 19, 231, 127))
+        self.verticalLayoutWidget_3.setGeometry(QRect(9, 19, 241, 127))
         self.vloSimSettings = QVBoxLayout(self.verticalLayoutWidget_3)
         self.vloSimSettings.setObjectName(u"vloSimSettings")
         self.vloSimSettings.setContentsMargins(0, 0, 0, 0)
@@ -256,6 +250,30 @@ class MainwindowUi(object):
         self.cbxDrawMassCenter.setSizePolicy(sizePolicy4)
 
         self.vloSimSettings.addWidget(self.cbxDrawMassCenter)
+
+        self.horizontalLayout_3 = QHBoxLayout()
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.cbxColorDependent = QCheckBox(self.verticalLayoutWidget_3)
+        self.cbxColorDependent.setObjectName(u"cbxColorDependent")
+        sizePolicy5 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.cbxColorDependent.sizePolicy().hasHeightForWidth())
+        self.cbxColorDependent.setSizePolicy(sizePolicy5)
+
+        self.horizontalLayout_3.addWidget(self.cbxColorDependent)
+
+        self.cbbColorDependsOn = QComboBox(self.verticalLayoutWidget_3)
+        self.cbbColorDependsOn.addItem("скорости")
+        self.cbbColorDependsOn.addItem("ускорении")
+        self.cbbColorDependsOn.setObjectName(u"cbbColorDependsOn")
+        sizePolicy5.setHeightForWidth(self.cbbColorDependsOn.sizePolicy().hasHeightForWidth())
+        self.cbbColorDependsOn.setSizePolicy(sizePolicy5)
+
+        self.horizontalLayout_3.addWidget(self.cbbColorDependsOn)
+
+
+        self.vloSimSettings.addLayout(self.horizontalLayout_3)
 
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
@@ -291,9 +309,6 @@ class MainwindowUi(object):
 
         self.btnShowHeatMap = QPushButton(self.verticalLayoutWidget_3)
         self.btnShowHeatMap.setObjectName(u"btnShowHeatMap")
-        sizePolicy5 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
-        sizePolicy5.setHorizontalStretch(0)
-        sizePolicy5.setVerticalStretch(0)
         sizePolicy5.setHeightForWidth(self.btnShowHeatMap.sizePolicy().hasHeightForWidth())
         self.btnShowHeatMap.setSizePolicy(sizePolicy5)
         self.btnShowHeatMap.setMinimumSize(QSize(23, 23))
@@ -330,40 +345,10 @@ class MainwindowUi(object):
 
         self.horizontalLayout.addWidget(self.lblSimulationDisplay)
 
-        self.tabWidget.addTab(self.sim_tab, "")
-        self.graphs_tab = QWidget()
-        self.graphs_tab.setObjectName(u"graphs_tab")
-        self.verticalLayoutWidget_4 = QWidget(self.graphs_tab)
-        self.verticalLayoutWidget_4.setObjectName(u"verticalLayoutWidget_4")
-        self.verticalLayoutWidget_4.setGeometry(QRect(9, 9, 871, 571))
-        self.verticalLayout = QVBoxLayout(self.verticalLayoutWidget_4)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.lbl_position_graph = QLabel(self.verticalLayoutWidget_4)
-        self.lbl_position_graph.setObjectName(u"lbl_position_graph")
-        sizePolicy.setHeightForWidth(self.lbl_position_graph.sizePolicy().hasHeightForWidth())
-        self.lbl_position_graph.setSizePolicy(sizePolicy)
-        self.lbl_position_graph.setFrameShape(QFrame.Panel)
-        self.lbl_position_graph.setFrameShadow(QFrame.Raised)
-
-        self.verticalLayout.addWidget(self.lbl_position_graph)
-
-        self.lbl_speed_graph = QLabel(self.verticalLayoutWidget_4)
-        self.lbl_speed_graph.setObjectName(u"lbl_speed_graph")
-        sizePolicy.setHeightForWidth(self.lbl_speed_graph.sizePolicy().hasHeightForWidth())
-        self.lbl_speed_graph.setSizePolicy(sizePolicy)
-        self.lbl_speed_graph.setFrameShape(QFrame.Panel)
-        self.lbl_speed_graph.setFrameShadow(QFrame.Raised)
-
-        self.verticalLayout.addWidget(self.lbl_speed_graph)
-
-        self.tabWidget.addTab(self.graphs_tab, "")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-
-        self.tabWidget.setCurrentIndex(0)
-
+        self.cbxColorDependent.clicked["bool"].connect(self.cbbColorDependsOn.setEnabled)
 
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
@@ -387,15 +372,15 @@ class MainwindowUi(object):
         self.cbxDrawTrails.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0442\u043e\u0431\u0440\u0430\u0436\u0430\u0442\u044c \u0441\u043b\u0435\u0434", None))
         self.cbxDrawSpdVects.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0442\u043e\u0431\u0440\u0430\u0436\u0430\u0442\u044c \u0432\u0435\u043a\u0442\u043e\u0440\u044b \u0441\u043a\u043e\u0440\u043e\u0441\u0442\u0435\u0439", None))
         self.cbxDrawMassCenter.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0442\u043e\u0431\u0440\u0430\u0436\u0430\u0442\u044c \u0446\u0435\u043d\u0442\u0440 \u043c\u0430\u0441\u0441 \u0441\u0438\u0441\u0442\u0435\u043c\u044b", None))
+        self.cbxColorDependent.setText(QCoreApplication.translate("MainWindow", u"\u0426\u0432\u0435\u0442 \u0437\u0430\u0432\u0438\u0441\u0438\u0442 \u043e\u0442", None))
+        self.cbbColorDependsOn.setItemText(0, QCoreApplication.translate("MainWindow", u"\u0441\u043a\u043e\u0440\u043e\u0441\u0442\u0438", None))
+        self.cbbColorDependsOn.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0443\u0441\u043a\u043e\u0440\u0435\u043d\u0438\u044f", None))
+
         self.btnSimStart.setText("")
         self.btnSimStep.setText("")
         self.btnSimStop.setText("")
         self.btnShowHeatMap.setText("")
         self.lblCreator.setText(QCoreApplication.translate("MainWindow", u"by Egor Kosachev | Distributed via MIT Liscence", None))
         self.lblSimulationDisplay.setText("")
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.sim_tab), QCoreApplication.translate("MainWindow", u"\u041c\u043e\u0434\u0435\u043b\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435", None))
-        self.lbl_position_graph.setText("")
-        self.lbl_speed_graph.setText("")
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.graphs_tab), QCoreApplication.translate("MainWindow", u"\u0413\u0440\u0430\u0444\u0438\u043a\u0438", None))
     # retranslateUi
 

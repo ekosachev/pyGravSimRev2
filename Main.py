@@ -45,6 +45,7 @@ class MainWindow(QMainWindow):
 
         self.ui.btnShowHeatMap.setDisabled(True)
         self.ui.btnSimStop.setDisabled(True)
+        self.ui.cbbColorDependsOn.setDisabled(True)
 
     def closeEvent(self, *args, **kwargs):
         super(QMainWindow, self).closeEvent(*args, **kwargs)
@@ -104,6 +105,13 @@ class MainWindow(QMainWindow):
                 self.draw_condition.notify()
                 time.sleep(1 / self.fps_limit)
 
+    def get_dependent_coloring_type(self) -> str:
+        match self.ui.cbbColorDependsOn.currentText():
+            case "скорости":
+                return "velocity"
+            case "ускорения":
+                return "acceleration"
+
     def simulation_cycle(self):
         while self.simulation_running:
             with self.draw_condition:
@@ -112,7 +120,9 @@ class MainWindow(QMainWindow):
                     self.simulation_instance.run_step(
                         draw_barycenter=self.ui.cbxDrawMassCenter.isChecked(),
                         draw_velocity_vectors=self.ui.cbxDrawSpdVects.isChecked(),
-                        draw_trails=self.ui.cbxDrawTrails.isChecked())).scaled(
+                        draw_trails=self.ui.cbxDrawTrails.isChecked(),
+                        dependent_coloring=self.ui.cbxColorDependent.isChecked(),
+                        dependent_coloring_type=self.get_dependent_coloring_type())).scaled(
                     self.ui.lblSimulationDisplay.width(),
                     self.ui.lblSimulationDisplay.height(),
                     QtCore.Qt.KeepAspectRatio

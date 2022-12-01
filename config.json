@@ -8,7 +8,11 @@
     "trail_color": [128, 128, 128],
     "barycenter_color": [255, 64, 64],
     "heatmap_gradient_color_0": [69, 202, 255],
-    "heatmap_gradient_color_1": [255, 27, 107]
+    "heatmap_gradient_color_1": [255, 27, 107],
+    "velocity_gradient_color_0": [69, 202, 255],
+    "velocity_gradient_color_1": [255, 27, 107],
+    "acceleration_gradient_color_0": [69, 202, 255],
+    "acceleration_gradient_color_1": [255, 27, 107]
   },
   "SIMULATION": {
     "frame_size_x": 500,

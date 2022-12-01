@@ -14,6 +14,7 @@ class Particle(object):
         self.velocity = velocity
         self.mass = mass
         self.radius = radius
+        self.acceleration = Vector2D(0, 0)
 
     def __repr__(self) -> str:
         return f"Тело {self.id}; XY0={repr(self.position)}; V0={repr(self.velocity)}; m={self.mass}"

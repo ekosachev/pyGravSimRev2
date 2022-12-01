@@ -17,22 +17,44 @@ class Simulation(object):
         self.frameImage = Image.new("RGB", framesize, tuple(self.config["DRAWING"]["background_color"]))
         self.frameDraw = ImageDraw.Draw(self.frameImage)
         self.calculatedPositions = []
-        self.simLog = [[x.position for x in self.particles]]
+        self.positionLog = [[x.position for x in self.particles]]
+        self.velocityLog = [[x.velocity.len() for x in self.particles]]
+        self.accelerationLog = [[0 for x in self.particles]]
+        self.maxVelocity = max(self.velocityLog[0])
+        self.minVelocity = min(self.velocityLog[0])
+        self.maxAcceleration = 0.
+        self.minAcceleration = 0.
 
-    def run_step(self, draw_velocity_vectors: bool, draw_barycenter: bool, draw_trails: bool) -> ImageQt:
+    def run_step(self,
+                 draw_velocity_vectors: bool,
+                 draw_barycenter: bool,
+                 draw_trails: bool,
+                 dependent_coloring: bool,
+                 dependent_coloring_type: str) -> ImageQt:
+
         # Calculate accelerations for all particles
+        self.velocityLog.append([])
+        self.accelerationLog.append([])
         for attracted in self.particles:
             for attractor in self.particles:
                 distance: Vector2D = attractor.position - attracted.position
                 try:
-                    attracted.velocity += distance.stretch(attractor.mass / pow(distance.len(), 2))
+                    acceleration = distance.stretch(attractor.mass / pow(distance.len(), 2))
+                    attracted.velocity += acceleration
+                    attracted.acceleration = acceleration
                 except ZeroDivisionError:
                     continue
+            self.maxVelocity = max(self.maxVelocity, attracted.velocity.len())
+            self.minVelocity = min(self.minVelocity, attracted.velocity.len())
+            self.maxAcceleration = max(self.maxAcceleration, attracted.acceleration.len())
+            self.minAcceleration = min(self.minAcceleration, attracted.acceleration.len())
+            self.velocityLog[-1].append(attracted.velocity.len())
+            self.accelerationLog[-1].append(attracted.acceleration.len())
             self.calculatedPositions.append(attracted.position + attracted.velocity)
 
         for i in range(len(self.particles)):
             self.particles[i].position = self.calculatedPositions[i]
-        self.simLog.append(self.calculatedPositions)
+        self.positionLog.append(self.calculatedPositions)
         self.calculatedPositions = []
 
         # Draw new frame
@@ -40,23 +62,46 @@ class Simulation(object):
                                  tuple(self.config["DRAWING"]["background_color"]))  # Clear the frame
 
         if draw_trails:
-            for i in range(len(self.simLog)):
+            for i in range(len(self.positionLog)):
                 if i == 0:
                     continue
-                for j in range(len(self.simLog[i])):
-                    self.frameDraw.line(xy=((self.simLog[i][j].x + self.framesize[0] // 2,
-                                             self.simLog[i][j].y + self.framesize[0] // 2),
-                                            (self.simLog[i - 1][j].x + self.framesize[0] // 2,
-                                             self.simLog[i - 1][j].y + self.framesize[0] // 2)),
+                for j in range(len(self.positionLog[i])):
+                    self.frameDraw.line(xy=((self.positionLog[i][j].x + self.framesize[0] // 2,
+                                             self.positionLog[i][j].y + self.framesize[0] // 2),
+                                            (self.positionLog[i - 1][j].x + self.framesize[0] // 2,
+                                             self.positionLog[i - 1][j].y + self.framesize[0] // 2)),
                                         fill=tuple(self.config["DRAWING"]["trail_color"]))
 
         for particle in self.particles:
+            if dependent_coloring:
+                match dependent_coloring_type:
+                    case "velocity":
+                        interpolated_velocity = translate(particle.velocity.len(), self.minVelocity, self.maxVelocity)
+                        c1 = self.config["DRAWING"]["velocity_gradient_color_0"]
+                        c2 = self.config["DRAWING"]["velocity_gradient_color_1"]
+                        color = [0, 0, 0]
+                        for comp in range(3):
+                            color[comp] = int(c1[comp] + interpolated_velocity * (c2[comp] - c1[comp]))
+                    case "acceleration":
+                        interpolated_acceleration = translate(particle.acceleration.len(),
+                                                              self.minAcceleration,
+                                                              self.maxAcceleration)
+                        c1 = self.config["DRAWING"]["acceleration_gradient_color_0"]
+                        c2 = self.config["DRAWING"]["acceleration_gradient_color_1"]
+                        color = [0, 0, 0]
+                        for comp in range(3):
+                            color[comp] = int(c1[comp] + interpolated_acceleration * (c2[comp] - c1[comp]))
+                    case _:
+                        color = self.config["DRAWING"]["particle_color"]
+            else:
+                color = self.config["DRAWING"]["particle_color"]
+
             pos: Vector2D = Vector2D(self.framesize[0] // 2, self.framesize[1] // 2) + particle.position
             self.frameDraw.ellipse(xy=((pos.x - particle.radius,
                                         pos.y - particle.radius),
                                        (pos.x + particle.radius,
                                         pos.y + particle.radius)),
-                                   fill=tuple(self.config["DRAWING"]["particle_color"]))
+                                   fill=tuple(color))
 
             self.frameDraw.text((pos.x,
                                  pos.y),
@@ -65,9 +110,8 @@ class Simulation(object):
 
             if draw_velocity_vectors:
                 self.frameDraw.line(xy=((pos.x, pos.y),
-                                        (pos.x + particle.velocity.x * (-self.config["DRAWING"]["vel_vect_multiplier"]),
-                                         pos.y + particle.velocity.y * (
-                                             -self.config["DRAWING"]["vel_vect_multiplier"]))),
+                                        (pos.x + particle.velocity.x * (self.config["DRAWING"]["vel_vect_multiplier"]),
+                                         pos.y + particle.velocity.y * (self.config["DRAWING"]["vel_vect_multiplier"]))),
                                     fill=tuple(self.config["DRAWING"]["velocity_vectors_color"]))
 
             if draw_barycenter:
