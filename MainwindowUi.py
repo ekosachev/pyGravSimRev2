@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainWindow.ui'
+## Form generated from reading UI file 'MainWindow.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.3.1
 ##
@@ -186,6 +186,11 @@ class MainwindowUi(object):
         self.gridLayout_2 = QGridLayout()
         self.gridLayout_2.setSpacing(6)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.btnNew = QPushButton(self.verticalLayoutWidget)
+        self.btnNew.setObjectName(u"btnNew")
+
+        self.gridLayout_2.addWidget(self.btnNew, 0, 0, 1, 2)
+
         self.btnDelete = QPushButton(self.verticalLayoutWidget)
         self.btnDelete.setObjectName(u"btnDelete")
         self.btnDelete.setEnabled(True)
@@ -195,20 +200,7 @@ class MainwindowUi(object):
         sizePolicy3.setHeightForWidth(self.btnDelete.sizePolicy().hasHeightForWidth())
         self.btnDelete.setSizePolicy(sizePolicy3)
 
-        self.gridLayout_2.addWidget(self.btnDelete, 1, 0, 1, 1)
-
-        self.btnCopy = QPushButton(self.verticalLayoutWidget)
-        self.btnCopy.setObjectName(u"btnCopy")
-        self.btnCopy.setEnabled(True)
-        sizePolicy3.setHeightForWidth(self.btnCopy.sizePolicy().hasHeightForWidth())
-        self.btnCopy.setSizePolicy(sizePolicy3)
-
-        self.gridLayout_2.addWidget(self.btnCopy, 1, 1, 1, 1)
-
-        self.btnNew = QPushButton(self.verticalLayoutWidget)
-        self.btnNew.setObjectName(u"btnNew")
-
-        self.gridLayout_2.addWidget(self.btnNew, 0, 0, 1, 2)
+        self.gridLayout_2.addWidget(self.btnDelete, 1, 0, 1, 2)
 
 
         self.verticalLayout_2.addLayout(self.gridLayout_2)
@@ -264,8 +256,8 @@ class MainwindowUi(object):
         self.horizontalLayout_3.addWidget(self.cbxColorDependent)
 
         self.cbbColorDependsOn = QComboBox(self.verticalLayoutWidget_3)
-        self.cbbColorDependsOn.addItem("скорости")
-        self.cbbColorDependsOn.addItem("ускорении")
+        self.cbbColorDependsOn.addItem("")
+        self.cbbColorDependsOn.addItem("")
         self.cbbColorDependsOn.setObjectName(u"cbbColorDependsOn")
         sizePolicy5.setHeightForWidth(self.cbbColorDependsOn.sizePolicy().hasHeightForWidth())
         self.cbbColorDependsOn.setSizePolicy(sizePolicy5)
@@ -365,9 +357,8 @@ class MainwindowUi(object):
         self.lblPosX.setText(QCoreApplication.translate("MainWindow", u"X:", None))
         self.lblRadius.setText(QCoreApplication.translate("MainWindow", u"\u0420\u0430\u0434\u0438\u0443\u0441:", None))
         self.lblMass.setText(QCoreApplication.translate("MainWindow", u"\u041c\u0430\u0441\u0441\u0430:", None))
-        self.btnDelete.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0434\u0430\u043b\u0438\u0442\u044c", None))
-        self.btnCopy.setText(QCoreApplication.translate("MainWindow", u"\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c", None))
         self.btnNew.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043e\u0437\u0434\u0430\u0442\u044c", None))
+        self.btnDelete.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0434\u0430\u043b\u0438\u0442\u044c", None))
         self.gpbSettings.setTitle(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438 \u0441\u0438\u043c\u0443\u043b\u044f\u0446\u0438\u0438", None))
         self.cbxDrawTrails.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0442\u043e\u0431\u0440\u0430\u0436\u0430\u0442\u044c \u0441\u043b\u0435\u0434", None))
         self.cbxDrawSpdVects.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0442\u043e\u0431\u0440\u0430\u0436\u0430\u0442\u044c \u0432\u0435\u043a\u0442\u043e\u0440\u044b \u0441\u043a\u043e\u0440\u043e\u0441\u0442\u0435\u0439", None))
