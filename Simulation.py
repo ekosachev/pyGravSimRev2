@@ -1,4 +1,5 @@
 from typing import List
+
 from Particle import Particle
 from Vector2D import Vector2D
 from json import load
@@ -70,7 +71,9 @@ class Simulation(object):
                                              self.positionLog[i][j].y + self.framesize[0] // 2),
                                             (self.positionLog[i - 1][j].x + self.framesize[0] // 2,
                                              self.positionLog[i - 1][j].y + self.framesize[0] // 2)),
-                                        fill=tuple(self.config["DRAWING"]["trail_color"]))
+                                        fill=tuple(map(lambda x: min(int(x * pow(self.config["DRAWING"]["trails_fade"],
+                                                                                 len(self.positionLog) - i)), 255),
+                                                       self.config["DRAWING"]["trail_color"])))
 
         for particle in self.particles:
             if dependent_coloring:
@@ -111,7 +114,8 @@ class Simulation(object):
             if draw_velocity_vectors:
                 self.frameDraw.line(xy=((pos.x, pos.y),
                                         (pos.x + particle.velocity.x * (self.config["DRAWING"]["vel_vect_multiplier"]),
-                                         pos.y + particle.velocity.y * (self.config["DRAWING"]["vel_vect_multiplier"]))),
+                                         pos.y + particle.velocity.y * (
+                                             self.config["DRAWING"]["vel_vect_multiplier"]))),
                                     fill=tuple(self.config["DRAWING"]["velocity_vectors_color"]))
 
             if draw_barycenter:

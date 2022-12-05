@@ -6,6 +6,7 @@
     "vel_vect_multiplier": 10,
     "particle_label_color": [0, 0, 0],
     "trail_color": [128, 128, 128],
+    "trails_fade": 0.99,
     "barycenter_color": [255, 64, 64],
     "heatmap_gradient_color_0": [69, 202, 255],
     "heatmap_gradient_color_1": [255, 27, 107],
