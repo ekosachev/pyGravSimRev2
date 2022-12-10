@@ -1,0 +1,28 @@
+[
+    {
+        "id": 1,
+        "position": [
+            100,
+            0
+        ],
+        "velocity": [
+            0,
+            4
+        ],
+        "mass": 20000,
+        "radius": 10
+    },
+    {
+        "id": 2,
+        "position": [
+            -100,
+            0
+        ],
+        "velocity": [
+            0,
+            -4
+        ],
+        "mass": 20000,
+        "radius": 10
+    }
+]

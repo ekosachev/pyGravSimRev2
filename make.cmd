@@ -1,0 +1,1 @@
+pyinstaller --noconfirm --onedir --windowed --icon "C:/Users/Egor/PycharmProjects/pyGravSimRev2/icon.ico" --name "pyGravSim" --add-data "C:/Users/Egor/PycharmProjects/pyGravSimRev2/config.json;." --add-data "C:/Users/Egor/PycharmProjects/pyGravSimRev2/saves;saves/"  "C:/Users/Egor/PycharmProjects/pyGravSimRev2/Main.py"
