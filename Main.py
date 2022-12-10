@@ -5,12 +5,13 @@ from json import load
 
 import PySide6.QtCore as QtCore
 from PySide6.QtGui import QPixmap
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from MainwindowUi import MainwindowUi
 from Particle import Particle
 from Simulation import Simulation
 from Vector2D import Vector2D
 from threading import Thread, Condition
+from SaveLoad import *
 
 
 class ListItem(object):
@@ -37,11 +38,14 @@ class MainWindow(QMainWindow):
             self.config = load(f)
 
         # CONNECTIONS
-        self.ui.btnNew.clicked.connect(self.add_particle)
+        self.ui.btnAdd.clicked.connect(self.add_particle)
         self.ui.btnDelete.clicked.connect(self.remove_particle)
         self.ui.btnSimStart.clicked.connect(self.start_simulation)
         self.ui.btnSimStop.clicked.connect(self.stop_simulation)
         self.ui.btnShowHeatMap.clicked.connect(self.draw_heatmap)
+        self.ui.btnSave.clicked.connect(self.save_state_to_file)
+        self.ui.btnLoad.clicked.connect(self.load_state_from_file)
+        self.ui.btnEdit.clicked.connect(self.edit_particle)
 
         self.ui.btnShowHeatMap.setDisabled(True)
         self.ui.btnSimStop.setDisabled(True)
@@ -63,7 +67,7 @@ class MainWindow(QMainWindow):
                         mass=self.ui.spbMass.value(),
                         radius=self.ui.spbRadius.value())
         self.particle_list.append(ListItem(temp))
-        self.current_min_free_id += 1
+        self.current_min_free_id = len(self.particle_list) + 1
         self.update_list_view()
 
     def remove_particle(self):
@@ -71,9 +75,41 @@ class MainWindow(QMainWindow):
         for i in range(len(self.particle_list)):
             if self.particle_list[i].label == selected_item:
                 self.particle_list.pop(i)
+                self.current_min_free_id = i + 1
                 break
         self.update_list_view()
 
+    def edit_particle(self):
+        selected_item = self.ui.lstBodies.selectedItems()[0].text()
+        for i in range(len(self.particle_list)):
+            if self.particle_list[i].label == selected_item:
+                self.particle_list[i] = ListItem(particle=Particle(id=i+1,
+                                                                   position=Vector2D(self.ui.spbPosX.value(),
+                                                                                     self.ui.spbPosY.value()),
+                                                                   velocity=Vector2D(self.ui.spbSpdX.value(),
+                                                                                     self.ui.spbSpdY.value()),
+                                                                   mass=self.ui.spbMass.value(),
+                                                                   radius=self.ui.spbRadius.value()))
+                break
+        self.update_list_view()
+
+    def load_state_from_file(self):
+        filename, _ = QFileDialog.getOpenFileName(self,
+                                                  caption="Загрузить начальное состояние из файла",
+                                                  filter="JSON files (*.json)",
+                                                  dir="./saves/")
+        new_particles = load_initial_state(filename)
+        self.particle_list = []
+        for particle in new_particles:
+            self.particle_list.append(ListItem(particle))
+        self.update_list_view()
+
+    def save_state_to_file(self):
+        filename, _ = QFileDialog.getSaveFileName(self,
+                                                  caption="Сохранить начальное состояние в файл",
+                                                  filter="JSON files (*.json)",
+                                                  dir="./saves/")
+        save_initial_state([x.particle for x in self.particle_list], filename)
     def start_simulation(self):
         self.simulation_instance = Simulation(particles=[x.particle for x in self.particle_list],
                                               framesize=(int(self.config["SIMULATION"]["frame_size_x"]),

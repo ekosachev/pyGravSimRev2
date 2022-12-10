@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>MainwindowUi</class>
+ <widget class="QMainWindow" name="MainwindowUi">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -92,8 +92,8 @@
            <rect>
             <x>10</x>
             <y>20</y>
-            <width>231</width>
-            <height>201</height>
+            <width>241</width>
+            <height>221</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -279,30 +279,161 @@
             </layout>
            </item>
            <item>
-            <layout class="QGridLayout" name="gridLayout_2">
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
              <property name="spacing">
-              <number>6</number>
+              <number>0</number>
              </property>
-             <item row="0" column="0" colspan="2">
-              <widget class="QPushButton" name="btnNew">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QPushButton" name="btnAdd">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>26</horstretch>
+                 <verstretch>26</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>26</width>
+                 <height>26</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Добавить тело</string>
+               </property>
+               <property name="toolTipDuration">
+                <number>2</number>
+               </property>
                <property name="text">
-                <string>Создать</string>
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="resource.qrc">
+                 <normaloff>:/icon/icons/free-icon-font-plus-3917757.png</normaloff>:/icon/icons/free-icon-font-plus-3917757.png</iconset>
                </property>
               </widget>
              </item>
-             <item row="1" column="0" colspan="2">
-              <widget class="QPushButton" name="btnDelete">
-               <property name="enabled">
-                <bool>true</bool>
-               </property>
+             <item>
+              <widget class="QPushButton" name="btnEdit">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>26</horstretch>
+                 <verstretch>26</verstretch>
                 </sizepolicy>
                </property>
+               <property name="maximumSize">
+                <size>
+                 <width>26</width>
+                 <height>26</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Редактировать тело</string>
+               </property>
+               <property name="toolTipDuration">
+                <number>2</number>
+               </property>
                <property name="text">
-                <string>Удалить</string>
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="resource.qrc">
+                 <normaloff>:/icon/icons/free-icon-font-pencil-3917651.png</normaloff>:/icon/icons/free-icon-font-pencil-3917651.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnDelete">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>26</horstretch>
+                 <verstretch>26</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>26</width>
+                 <height>26</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Удалить тело</string>
+               </property>
+               <property name="toolTipDuration">
+                <number>2</number>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="resource.qrc">
+                 <normaloff>:/icon/icons/free-icon-font-trash-3917772.png</normaloff>:/icon/icons/free-icon-font-trash-3917772.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnSave">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>26</horstretch>
+                 <verstretch>26</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>26</width>
+                 <height>26</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Сохранить начальное состояние</string>
+               </property>
+               <property name="toolTipDuration">
+                <number>2</number>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="resource.qrc">
+                 <normaloff>:/icon/icons/free-icon-font-download-3917768.png</normaloff>:/icon/icons/free-icon-font-download-3917768.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnLoad">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>26</horstretch>
+                 <verstretch>26</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>26</width>
+                 <height>26</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Сохранить конфигурацию</string>
+               </property>
+               <property name="toolTipDuration">
+                <number>2</number>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="resource.qrc">
+                 <normaloff>:/icon/icons/free-icon-font-upload-3917769.png</normaloff>:/icon/icons/free-icon-font-upload-3917769.png</iconset>
                </property>
               </widget>
              </item>
@@ -333,9 +464,9 @@
           <property name="geometry">
            <rect>
             <x>9</x>
-            <y>19</y>
+            <y>15</y>
             <width>241</width>
-            <height>127</height>
+            <height>131</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="vloSimSettings">
@@ -348,7 +479,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>Отображать след</string>
+              <string>Отображать траектории</string>
              </property>
             </widget>
            </item>
@@ -374,7 +505,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>Отображать центр масс системы</string>
+              <string>Отображать барицентр</string>
              </property>
             </widget>
            </item>
