@@ -42,6 +42,7 @@ class MainWindow(QMainWindow):
         self.ui.btnDelete.clicked.connect(self.remove_particle)
         self.ui.btnSimStart.clicked.connect(self.start_simulation)
         self.ui.btnSimStop.clicked.connect(self.stop_simulation)
+        self.ui.btnSimStep.clicked.connect(self.run_single_step)
         self.ui.btnShowHeatMap.clicked.connect(self.draw_heatmap)
         self.ui.btnSave.clicked.connect(self.save_state_to_file)
         self.ui.btnLoad.clicked.connect(self.load_state_from_file)
@@ -171,6 +172,19 @@ class MainWindow(QMainWindow):
                 self.ui.lblSimulationDisplay.height(),
                 QtCore.Qt.KeepAspectRatio
             )))
+
+    def run_single_step(self):
+        self.ui.lblSimulationDisplay.setPixmap(QPixmap.fromImage(
+            self.simulation_instance.run_step(
+                draw_barycenter=self.ui.cbxDrawMassCenter.isChecked(),
+                draw_velocity_vectors=self.ui.cbxDrawSpdVects.isChecked(),
+                draw_trails=self.ui.cbxDrawTrails.isChecked(),
+                dependent_coloring=self.ui.cbxColorDependent.isChecked(),
+                dependent_coloring_type=self.get_dependent_coloring_type())).scaled(
+            self.ui.lblSimulationDisplay.width(),
+            self.ui.lblSimulationDisplay.height(),
+            QtCore.Qt.KeepAspectRatio
+        ))
 
 
 if __name__ == "__main__":
