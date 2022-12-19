@@ -17,6 +17,7 @@
   },
   "SIMULATION": {
     "frame_size_x": 500,
-    "frame_size_y": 500
+    "frame_size_y": 500,
+    "fps_limit": 30
   }
 }

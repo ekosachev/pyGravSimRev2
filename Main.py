@@ -31,11 +31,13 @@ class MainWindow(QMainWindow):
         self.current_min_free_id: int = 1
         self.particle_list: List[ListItem] = []
         self.draw_condition = Condition()
-        self.fps_limit: int = 30
+
 
         self.simulation_running = False
         with open("config.json") as f:
             self.config = load(f)
+
+        self.frame_delay: float = 1 / self.config["SIMULATION"]["fps_limit"]
 
         # CONNECTIONS
         self.ui.btnAdd.clicked.connect(self.add_particle)
@@ -140,7 +142,7 @@ class MainWindow(QMainWindow):
         while self.simulation_running:
             with self.draw_condition:
                 self.draw_condition.notify()
-                time.sleep(1 / self.fps_limit)
+                time.sleep(self.frame_delay)
 
     def get_dependent_coloring_type(self) -> str:
         match self.ui.cbbColorDependsOn.currentText():
